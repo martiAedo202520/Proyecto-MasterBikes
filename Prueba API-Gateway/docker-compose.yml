@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+
+  # 1. Base de Datos para el servicio de Clientes
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: bicicleta_db
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # 2. Microservicio de Clientes
+  clientes-service:
+    build:
+      context: ./GestionDeBicicleta_Cliente
+      dockerfile: Dockerfile
+    container_name: clientes-service
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: 8081
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/bicicleta_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+  # 3. Microservicio de Arriendos
+  arriendos-service:
+    build:
+      context: ./GestionDeBicicleta_Arriendo
+      dockerfile: Dockerfile
+    container_name: arriendos-service
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      PORT: 8082
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/bicicleta_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+  # 4. El API Gateway
+  api-gateway:
+    build:
+      context: ./API-Gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    restart: always
+    ports:
+      - "8084:8084"
+    environment:
+      PORT: 8084
+      CLIENTES_SERVICE_URL: http://clientes-service:8081
+      ARRIENDOS_SERVICE_URL: http://arriendos-service:8082
+    depends_on:
+      - clientes-service
+      - arriendos-service
+
+volumes:
+  mysql_data:
