@@ -1,5 +1,8 @@
 # Proyecto MasterBikes
 
+##  Repositorio del Proyecto
+* **GitHub Repository:** [https://github.com/martiAedo202520/Proyecto-MasterBikes.git](https://github.com/martiAedo202520/Proyecto-MasterBikes.git)
+
 ## 1. Descripción del Proyecto
 Este es un proyecto de arriendo de bicicletas diseñado bajo una arquitectura de microservicios, el cual está dividido en dos servicios principales: **Arriendo** y **Cliente**. El microservicio de Clientes gestiona la información de los usuarios, mientras que el de Arriendos controla el flujo de arriendo, los tiempos y las tarifas de las bicicletas.
 
@@ -33,21 +36,21 @@ Este es un proyecto de arriendo de bicicletas diseñado bajo una arquitectura de
 
 ## 4. APIs y Endpoints Disponibles
 
-### 🟢 API de Clientes (`ms-clientes`)
+### API de Clientes (`ms-clientes`)
 * `POST /api/v1/clientes` - Crear un nuevo cliente
 * `GET /api/v1/clientes` - Obtener todos los clientes
 * `GET /api/v1/clientes/{id}` - Obtener un cliente por su ID
 * `PUT /api/v1/clientes/{id}` - Actualizar una cliente existente
 * `DELETE /api/v1/clientes/{id}` - Eliminar un cliente
 
-### 🟢 API de Arriendos (`ms-arriendos`)
+### API de Arriendos (`ms-arriendos`)
 * `POST /api/v1/arriendos` - Crear un nuevo arriendo
 * `GET /api/v1/arriendos` - Obtener todos los arriendos
 * `GET /api/v1/arriendos/{id}` - Obtener un arriendo por su ID
 * `PUT /api/v1/arriendos/{id}` - Actualizar un arriendo existente
 * `DELETE /api/v1/arriendos/{id}` - Eliminar un arriendo
 
-### 🟢 API de Tipos de Bicicleta (`ms-arriendos`)
+### API de Tipos de Bicicleta (`ms-arriendos`)
 * `POST /api/v1/tipos-bicicletas` - Crear un nuevo tipo de bicicleta
 * `GET /api/v1/tipos-bicicletas` - Obtener todos los tipos de bicicletas
 * `GET /api/v1/tipos-bicicletas/{id}` - Obtener un tipo de bicicleta por su ID
