@@ -10,27 +10,27 @@ import cl.duoc.GestionDeBicicleta_Cliente.repository.ClienteRepository;
 import cl.duoc.GestionDeBicicleta_Cliente.service.ClienteService;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootTest(properties = {
-        "spring.datasource.url=jdbc:h2:mem:testdb_cliente;DB_CLOSE_DELAY=-1;MODE=MySQL",
-        "spring.datasource.driver-class-name=org.h2.Driver",
-        "spring.datasource.username=sa",
-        "spring.datasource.password=",
-        "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
-        "spring.jpa.hibernate.ddl-auto=update"
-})
+@ExtendWith(MockitoExtension.class)// se usa la extensión de Mockito (no levanta Spring ni BD)
 public class ClienteServiceTest {
 
-    @Autowired
+    @InjectMocks //@InjectMocks crea la instancia del servicio e inyecta los mocks dentro de él
     private ClienteService clienteService;
 
-    @MockBean
+
+    @Mock //@Mock crea un simulador puro del repositorio 0% Base de datos
     private ClienteRepository clienteRepository;
 
     // TEST MÉTODO: obtenerTodos()
