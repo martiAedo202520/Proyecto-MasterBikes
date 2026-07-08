@@ -12,10 +12,17 @@
         <module name="GestionDeBicicleta_Cliente" />
         <module name="GestionDeBicicleta_Arriendo" />
       </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="API-Gateway" />
+      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="API-Gateway" options="-parameters" />
       <module name="GestionDeBicicleta_Arriendo" options="-parameters" />
       <module name="GestionDeBicicleta_Cliente" options="-parameters" />
     </option>
