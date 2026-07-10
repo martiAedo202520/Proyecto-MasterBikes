@@ -6,12 +6,17 @@ import java.util.Map;
 
 @RestController
 public class GatewayController {
+
     @GetMapping("/gateway/health")
     public Map<String, String> healthCheck() {
         Map<String, String> response = new HashMap<>();
-        response.put("status", "UP");
+
+        response.put("estado", "operativo");
+        response.put("responsable", "Martina Aedo");
         response.put("component", "API Gateway MasterBikes");
         response.put("message", "Gateway verificado en puerto 8084");
+        response.put("version", "1.0");
+
         return response;
     }
 }

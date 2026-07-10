@@ -19,6 +19,9 @@ public class GatewayTest {
                 .exchange()
                 .expectStatus().isOk() // Verifica que el servidor devuelva un estado 200 OK
                 .expectBody()
-                .jsonPath("$.status").isEqualTo("UP"); // Verifica que el JSON diga status "UP"
+                .jsonPath("$.estado").isEqualTo("operativo")
+                .jsonPath("$.responsable").isEqualTo("Martina Aedo")
+                .jsonPath("$.component").isEqualTo("API Gateway MasterBikes")
+                .jsonPath("$.version").isEqualTo("1.0");
     }
 }
