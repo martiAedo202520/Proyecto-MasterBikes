@@ -52,15 +52,17 @@ public class ClienteRequest {
 
     @NotBlank(message = "El teléfono es obligatorio.")
     @Schema(
-            description = "Número telefónico móvil o fijo de contacto del cliente",
-            example = "+56912345678",
+            description = "Número telefónico de contacto del cliente, incluyendo código de país",
+            example = "+56987654321",
             requiredMode = Schema.RequiredMode.REQUIRED
     )
     private String telefono;
 
-
-    @Schema(description = "Dirección de residencia particular (Opcional)", example = "Av. Concha y Toro 1340, Puente Alto")
-    private String direccion; // Opcional, no requiere anotación obligatoria
+    @Schema(
+            description = "Dirección de residencia del cliente utilizada para contacto o despacho",
+            example = "Av. Vicuña Mackenna 1234, Santiago"
+    )
+    private String direccion;
 
     @NotNull(message = "El estado activo/inactivo es obligatorio.")
     @Schema(
