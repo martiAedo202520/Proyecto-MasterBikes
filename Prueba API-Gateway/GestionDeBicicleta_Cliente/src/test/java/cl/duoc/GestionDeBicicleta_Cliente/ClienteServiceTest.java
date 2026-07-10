@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
@@ -173,4 +174,19 @@ public class ClienteServiceTest {
             clienteService.eliminar(id);
         });
     }
+
+    @Test
+    void dadaUnaListaVacia_cuandoSeListanTodos_entoncesRetornaListaVacia() {
+        // GIVEN
+        Mockito.when(clienteRepository.findAll()).thenReturn(java.util.List.of());
+
+        // WHEN:
+        List<cl.duoc.GestionDeBicicleta_Cliente.dto.ClienteResponse> resultado = clienteService.obtenerTodos();
+
+        // THEN:
+        org.junit.jupiter.api.Assertions.assertNotNull(resultado);
+        org.junit.jupiter.api.Assertions.assertTrue(resultado.isEmpty());
+    }
+
+
 }
